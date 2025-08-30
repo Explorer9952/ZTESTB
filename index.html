@@ -12,48 +12,40 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            min-height: 100vh;
-            padding: 20px;
+            background-color: #f0f0f0;
+            padding: 10px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
         
         header {
-            text-align: center;
-            padding: 25px;
-            background: linear-gradient(90deg, #3498db, #2c3e50);
+            padding: 15px;
+            background-color: #2c3e50;
             color: white;
+            text-align: center;
         }
         
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .description {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
         }
         
         .main-content {
             display: flex;
             flex-direction: column;
-            padding: 20px;
         }
         
-        @media (min-width: 900px) {
+        @media (min-width: 768px) {
             .main-content {
                 flex-direction: row;
             }
@@ -61,173 +53,134 @@
         
         .player-section {
             flex: 2;
-            padding: 15px;
+            padding: 10px;
         }
         
         .playlist-section {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             background-color: #f8f9fa;
-            border-radius: 10px;
+            border-left: 1px solid #ddd;
         }
         
         .video-container {
-            position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
             background-color: #000;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         #videoPlayer {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 70vh;
             background-color: #000;
         }
         
         .controls {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 5px;
+            margin-top: 10px;
             justify-content: center;
         }
         
         .controls button {
-            padding: 12px 20px;
-            background: linear-gradient(to bottom, #3498db, #2980b9);
+            padding: 8px 12px;
+            background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 3px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
         }
         
         .controls button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(to bottom, #2980b9, #256a9e);
-        }
-        
-        .controls button:active {
-            transform: translateY(0);
+            background-color: #2980b9;
         }
         
         .controls button:disabled {
-            background: linear-gradient(to bottom, #bdc3c7, #95a5a6);
+            background-color: #bdc3c7;
             cursor: not-allowed;
-            transform: none;
         }
         
         .upload-section {
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 10px;
+            margin-bottom: 10px;
             background-color: #e8f4fc;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .upload-area {
-            border: 3px dashed #3498db;
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 15px;
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-        
-        .upload-area:hover {
-            background-color: rgba(52, 152, 219, 0.2);
-            border-color: #2980b9;
-        }
-        
-        .upload-icon {
-            font-size: 50px;
-            color: #3498db;
-            margin-bottom: 15px;
-        }
-        
-        input[type="file"] {
-            display: none;
+            border-radius: 5px;
         }
         
         .url-input {
             display: flex;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         
         .url-input input {
             flex: 1;
-            padding: 14px;
-            border: 2px solid #ddd;
-            border-radius: 50px 0 0 50px;
-            font-size: 16px;
-            outline: none;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px 0 0 3px;
+            font-size: 14px;
         }
         
         .url-input button {
-            padding: 14px 25px;
-            background: linear-gradient(to bottom, #2ecc71, #27ae60);
+            padding: 8px 12px;
+            background-color: #2ecc71;
             color: white;
             border: none;
-            border-radius: 0 50px 50px 0;
+            border-radius: 0 3px 3px 0;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
         }
         
         .url-input button:hover {
-            background: linear-gradient(to bottom, #27ae60, #219653);
+            background-color: #27ae60;
         }
         
         .playlist {
             max-height: 400px;
             overflow-y: auto;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 3px;
             background-color: white;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .playlist-item {
-            padding: 12px 15px;
+            padding: 10px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
-            transition: all 0.2s;
-            border-radius: 5px;
+            font-size: 14px;
         }
         
         .playlist-item:hover {
             background-color: #e3f2fd;
-            transform: translateX(5px);
         }
         
         .playlist-item.active {
             background-color: #bbdefb;
             font-weight: bold;
-            border-left: 4px solid #2196f3;
         }
         
         .playlist-item:last-child {
             border-bottom: none;
         }
         
+        .group-title {
+            padding: 8px;
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .group-title:first-child {
+            margin-top: 0;
+        }
+        
         .error {
             color: #e74c3c;
-            margin-top: 15px;
-            padding: 12px;
+            margin-top: 10px;
+            padding: 8px;
             background-color: #fadbd8;
-            border-radius: 5px;
-            text-align: center;
+            border-radius: 3px;
+            font-size: 14px;
         }
         
         .hidden {
@@ -235,42 +188,29 @@
         }
         
         .now-playing {
-            margin: 15px 0;
-            padding: 12px;
-            background: linear-gradient(90deg, #ffeaa7, #fab1a0);
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: white;
-            background: linear-gradient(90deg, #2c3e50, #1a2a6c);
-            margin-top: 20px;
-            border-radius: 0 0 10px 10px;
-        }
-        
-        .instructions {
-            margin: 20px 0;
-            padding: 15px;
+            margin: 10px 0;
+            padding: 8px;
             background-color: #ffeebc;
-            border-radius: 8px;
-            border-left: 4px solid #ffc107;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
         }
         
-        .instructions h3 {
-            margin-bottom: 10px;
-            color: #d35400;
+        .simple-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-align: center;
         }
         
-        .instructions ol {
-            padding-left: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 8px;
+        .simple-button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
@@ -278,20 +218,13 @@
     <div class="container">
         <header>
             <h1>M3U Видеоплеер</h1>
-            <p class="description">Воспроизведение видео из M3U плейлистов</p>
+            <p>Простой плеер для M3U плейлистов</p>
         </header>
         
         <div class="main-content">
             <div class="player-section">
                 <div class="upload-section">
-                    <h2>Загрузка плейлиста</h2>
-                    <div class="upload-area" id="dropArea">
-                        <div class="upload-icon">📁</div>
-                        <span>Перетащите M3U файл сюда или</span>
-                        <label for="fileInput" style="color: #3498db; cursor: pointer; font-weight: bold;">выберите файл</label>
-                        <input type="file" id="fileInput" accept=".m3u,.m3u8">
-                        <p>Поддерживаются форматы M3U и M3U8</p>
-                    </div>
+                    <button class="simple-button" id="loadDefaultBtn">Загрузить пример плейлиста</button>
                     
                     <div class="url-input">
                         <input type="text" id="urlInput" placeholder="Введите URL M3U плейлиста">
@@ -301,17 +234,8 @@
                     <div id="errorMessage" class="error hidden"></div>
                 </div>
                 
-                <div class="instructions">
-                    <h3>Как использовать:</h3>
-                    <ol>
-                        <li>Загрузите M3U файл или укажите URL плейлиста</li>
-                        <li>Выберите видео из списка плейлиста</li>
-                        <li>Управляйте воспроизведением с помощью кнопок</li>
-                    </ol>
-                </div>
-                
                 <div class="now-playing hidden" id="nowPlaying">
-                    Сейчас воспроизводится: <span id="currentTrackName">Название видео</span>
+                    Сейчас: <span id="currentTrackName">Название канала</span>
                 </div>
                 
                 <div class="video-container">
@@ -320,7 +244,6 @@
                 
                 <div class="controls">
                     <button id="prevBtn" disabled>⏮ Назад</button>
-                    <button id="playPauseBtn">▶ Воспроизвести</button>
                     <button id="nextBtn" disabled>Вперед ⏭</button>
                 </div>
             </div>
@@ -328,61 +251,51 @@
             <div class="playlist-section">
                 <h2>Плейлист</h2>
                 <div class="playlist" id="playlistContainer">
-                    <p style="text-align: center; padding: 20px;">Загрузите M3U плейлист, чтобы увидеть список видео</p>
+                    <p style="text-align: center; padding: 20px;">Загрузите M3U плейлист, чтобы увидеть список каналов</p>
                 </div>
             </div>
         </div>
-        
-        <footer>
-            <p>M3U Видеоплеер © 2023 | Простой способ воспроизведения видео из плейлистов</p>
-        </footer>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Элементы DOM
-            const fileInput = document.getElementById('fileInput');
             const urlInput = document.getElementById('urlInput');
             const loadUrlBtn = document.getElementById('loadUrlBtn');
-            const dropArea = document.getElementById('dropArea');
+            const loadDefaultBtn = document.getElementById('loadDefaultBtn');
             const videoPlayer = document.getElementById('videoPlayer');
             const playlistContainer = document.getElementById('playlistContainer');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
-            const playPauseBtn = document.getElementById('playPauseBtn');
             const errorMessage = document.getElementById('errorMessage');
             const nowPlaying = document.getElementById('nowPlaying');
             const currentTrackName = document.getElementById('currentTrackName');
             
             let currentPlaylist = [];
             let currentTrackIndex = -1;
-            let hls; // Для поддержки HLS streams
             
-            // Обработчики для drag and drop
-            dropArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropArea.style.backgroundColor = 'rgba(52, 152, 219, 0.3)';
-            });
+            // Пример плейлиста из вашего описания
+            const examplePlaylist = `#EXTM3U
+#EXTINF:-1 group-title="Каналы от Dmitry-tv",D-TV6
+http://dmitry-tv.ddns.net:8666/his/CH_D-TV6
+#EXTINF:-1 group-title="Каналы от Dmitry-tv",Dmitry-tv HD
+http://dmitry-tv.ddns.net:8000/his/CH_DMITRY-TVHD
+#EXTINF:-1 group-title="ЭФИРНЫЕ",Первый канал (+4)
+http://dmi3y-tv.ru/hls/T2/CH_1TV_4.m3u8
+#EXTINF:-1 group-title="ЭФИРНЫЕ",Россия 1
+http://dmi3y-tv.ru/hls/smotrim/T2/CH_RUSSIA1.m3u8
+#EXTINF:-1 group-title="ЭФИРНЫЕ",Россия 1 HD
+http://dmi3y-tv.ru/hls/smotrim/T2/CH_RUSSIA1HD.m3u8
+#EXTINF:-1 group-title="ЭФИРНЫЕ",Россия 1 HD (+2) (auto)
+http://vgtrkregion-reg.cdnvideo.ru/vgtrk/2/russia1-hd/index.m3u8
+#EXTINF:-1 group-title="ЭФИРНЫЕ",Россия 1 (+4)
+http://dmi3y-tv.ru/hls/T2/CH_RUSSIA1_4.m3u8
+#EXTINF:-1 group-title="ЭФИРНЫЕ",Россия 1 HD (+4) (auto)
+http://vgtrkregion-reg.cdnvideo.ru/vgtrk/4/russia1-hd/index.m3u8`;
             
-            dropArea.addEventListener('dragleave', () => {
-                dropArea.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
-            });
-            
-            dropArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropArea.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
-                
-                if (e.dataTransfer.files.length) {
-                    fileInput.files = e.dataTransfer.files;
-                    handleFileUpload(e.dataTransfer.files[0]);
-                }
-            });
-            
-            // Обработчик выбора файла
-            fileInput.addEventListener('change', (e) => {
-                if (e.target.files.length) {
-                    handleFileUpload(e.target.files[0]);
-                }
+            // Обработчик загрузки примера плейлиста
+            loadDefaultBtn.addEventListener('click', () => {
+                parsePlaylist(examplePlaylist);
             });
             
             // Обработчик загрузки по URL
@@ -398,36 +311,10 @@
             // Обработчики кнопок навигации
             prevBtn.addEventListener('click', playPreviousTrack);
             nextBtn.addEventListener('click', playNextTrack);
-            playPauseBtn.addEventListener('click', togglePlayPause);
-            
-            // Функция загрузки плейлиста из файла
-            function handleFileUpload(file) {
-                if (!file.name.toLowerCase().endsWith('.m3u') && !file.name.toLowerCase().endsWith('.m3u8')) {
-                    showError('Пожалуйста, выберите файл в формате M3U или M3U8');
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    parsePlaylist(e.target.result);
-                };
-                reader.onerror = () => {
-                    showError('Ошибка при чтении файла');
-                };
-                reader.readAsText(file);
-            }
             
             // Функция загрузки плейлиста по URL
             function loadPlaylistFromUrl(url) {
                 hideError();
-                
-                // Проверяем, является ли URL прямым видеофайлом
-                if (isVideoFile(url)) {
-                    currentPlaylist = [{ title: 'Прямое видео', url: url }];
-                    renderPlaylist();
-                    playTrack(0);
-                    return;
-                }
                 
                 fetch(url)
                     .then(response => {
@@ -442,95 +329,92 @@
                     });
             }
             
-            // Проверка, является ли URL прямым видеофайлом
-            function isVideoFile(url) {
-                const videoExtensions = ['.mp4', '.webm', '.ogg', '.m3u8', '.ts', '.mov', '.avi', '.wmv'];
-                return videoExtensions.some(ext => url.toLowerCase().includes(ext));
-            }
-            
             // Функция парсинга M3U плейлиста
             function parsePlaylist(content) {
                 hideError();
                 
                 try {
                     const lines = content.split('\n');
-                    const tracks = [];
+                    const groups = {};
+                    let currentGroup = "Без группы";
                     
-                    let track = {};
                     for (let i = 0; i < lines.length; i++) {
                         const line = lines[i].trim();
                         
                         if (line.startsWith('#EXTINF:')) {
-                            // Извлекаем информацию о треке
-                            const durationMatch = line.match(/#EXTINF:(-?\d+)/);
+                            // Извлекаем информацию о канале
+                            const groupMatch = line.match(/group-title="([^"]*)"/);
                             const titleMatch = line.match(/,(.*)$/);
                             
-                            track = {
-                                duration: durationMatch ? parseInt(durationMatch[1]) : 0,
-                                title: titleMatch ? titleMatch[1].trim() : 'Без названия'
-                            };
-                        } else if (line && !line.startsWith('#') && !line.startsWith('http')) {
-                            // Это URL или путь к файлу (не комментарий и не пустая строка)
-                            track.url = line;
-                            tracks.push(track);
-                            track = {};
-                        } else if (line.startsWith('http')) {
-                            // Прямая ссылка без метаданных
-                            track = track || {};
-                            track.url = line;
-                            track.title = track.title || `Видео ${tracks.length + 1}`;
-                            tracks.push(track);
-                            track = {};
-                        }
-                    }
-                    
-                    if (tracks.length === 0) {
-                        // Попробуем найти любые URL в содержимом
-                        const urlRegex = /(https?:\/\/[^\s]+)/g;
-                        const urls = content.match(urlRegex);
-                        
-                        if (urls && urls.length) {
-                            urls.forEach(url => {
-                                tracks.push({
-                                    title: `Видео ${tracks.length + 1}`,
-                                    url: url
+                            if (groupMatch) {
+                                currentGroup = groupMatch[1];
+                            }
+                            
+                            const title = titleMatch ? titleMatch[1].trim() : 'Без названия';
+                            const urlLine = lines[++i] ? lines[i].trim() : '';
+                            
+                            if (urlLine && !urlLine.startsWith('#')) {
+                                if (!groups[currentGroup]) {
+                                    groups[currentGroup] = [];
+                                }
+                                
+                                groups[currentGroup].push({
+                                    title: title,
+                                    url: urlLine,
+                                    group: currentGroup
                                 });
-                            });
-                        } else {
-                            showError('Не удалось найти видео в плейлисте');
-                            return;
+                            }
                         }
                     }
                     
-                    currentPlaylist = tracks;
-                    renderPlaylist();
+                    // Преобразуем группы в плоский список для воспроизведения
+                    currentPlaylist = [];
+                    for (const group in groups) {
+                        currentPlaylist = currentPlaylist.concat(groups[group]);
+                    }
+                    
+                    if (currentPlaylist.length === 0) {
+                        showError('Не удалось найти каналы в плейлисте');
+                        return;
+                    }
+                    
+                    renderPlaylist(groups);
                     playTrack(0);
                 } catch (error) {
                     showError(`Ошибка при разборе плейлиста: ${error.message}`);
                 }
             }
             
-            // Функция отображения плейлиста
-            function renderPlaylist() {
+            // Функция отображения плейлиста с группировкой
+            function renderPlaylist(groups) {
                 playlistContainer.innerHTML = '';
                 
-                if (currentPlaylist.length === 0) {
+                if (Object.keys(groups).length === 0) {
                     playlistContainer.innerHTML = '<p>Плейлист пуст</p>';
                     return;
                 }
                 
-                currentPlaylist.forEach((track, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'playlist-item';
-                    if (index === currentTrackIndex) {
-                        item.classList.add('active');
-                    }
+                for (const group in groups) {
+                    const groupElement = document.createElement('div');
+                    groupElement.className = 'group-title';
+                    groupElement.textContent = group;
+                    playlistContainer.appendChild(groupElement);
                     
-                    item.textContent = track.title;
-                    item.addEventListener('click', () => playTrack(index));
-                    
-                    playlistContainer.appendChild(item);
-                });
+                    groups[group].forEach((channel, index) => {
+                        const globalIndex = currentPlaylist.findIndex(c => c.url === channel.url);
+                        
+                        const item = document.createElement('div');
+                        item.className = 'playlist-item';
+                        if (globalIndex === currentTrackIndex) {
+                            item.classList.add('active');
+                        }
+                        
+                        item.textContent = channel.title;
+                        item.addEventListener('click', () => playTrack(globalIndex));
+                        
+                        playlistContainer.appendChild(item);
+                    });
+                }
                 
                 // Активируем кнопки навигации
                 prevBtn.disabled = currentPlaylist.length <= 1;
@@ -547,51 +431,33 @@
                 currentTrackIndex = index;
                 
                 // Останавливаем предыдущее воспроизведение
-                if (hls) {
-                    hls.destroy();
-                    hls = null;
-                }
+                videoPlayer.src = '';
                 
-                videoPlayer.src = track.url;
-                videoPlayer.load();
-                
-                // Показываем информацию о текущем треке
-                currentTrackName.textContent = track.title;
-                nowPlaying.classList.remove('hidden');
-                
-                // Обновляем выделение в плейлисте
-                const items = playlistContainer.querySelectorAll('.playlist-item');
-                items.forEach((item, i) => {
-                    if (i === index) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-                
-                // Пытаемся воспроизвести
-                const playPromise = videoPlayer.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(_ => {
-                            playPauseBtn.textContent = '⏸ Пауза';
-                        })
-                        .catch(error => {
-                            showError('Не удалось автоматически воспроизвести видео: ' + error.message);
-                            playPauseBtn.textContent = '▶ Воспроизвести';
-                        });
-                }
-            }
-            
-            // Функция переключения play/pause
-            function togglePlayPause() {
-                if (videoPlayer.paused) {
-                    videoPlayer.play();
-                    playPauseBtn.textContent = '⏸ Пауза';
-                } else {
-                    videoPlayer.pause();
-                    playPauseBtn.textContent = '▶ Воспроизвести';
+                // Пытаемся установить новый источник
+                try {
+                    videoPlayer.src = track.url;
+                    videoPlayer.load();
+                    
+                    // Показываем информацию о текущем треке
+                    currentTrackName.textContent = track.title;
+                    nowPlaying.classList.remove('hidden');
+                    
+                    // Обновляем выделение в плейлисте
+                    const items = playlistContainer.querySelectorAll('.playlist-item');
+                    items.forEach((item, i) => {
+                        if (i === index) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                    
+                    // Пытаемся воспроизвести
+                    videoPlayer.play().catch(error => {
+                        showError('Не удалось воспроизвести видео: ' + error.message);
+                    });
+                } catch (error) {
+                    showError('Ошибка при загрузке видео: ' + error.message);
                 }
             }
             
@@ -601,7 +467,7 @@
                 
                 let nextIndex = currentTrackIndex + 1;
                 if (nextIndex >= currentPlaylist.length) {
-                    nextIndex = 0; // Зацикливание плейлиста
+                    nextIndex = 0;
                 }
                 
                 playTrack(nextIndex);
@@ -613,7 +479,7 @@
                 
                 let prevIndex = currentTrackIndex - 1;
                 if (prevIndex < 0) {
-                    prevIndex = currentPlaylist.length - 1; // Зацикливание плейлиста
+                    prevIndex = currentPlaylist.length - 1;
                 }
                 
                 playTrack(prevIndex);
@@ -632,15 +498,6 @@
             
             // Автоматическое воспроизведение следующего видео при завершении текущего
             videoPlayer.addEventListener('ended', playNextTrack);
-            
-            // Обновление кнопки play/pause при изменении состояния видео
-            videoPlayer.addEventListener('play', () => {
-                playPauseBtn.textContent = '⏸ Пауза';
-            });
-            
-            videoPlayer.addEventListener('pause', () => {
-                playPauseBtn.textContent = '▶ Воспроизвести';
-            });
         });
     </script>
 </body>
