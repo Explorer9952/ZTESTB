@@ -1,12 +1,20 @@
 body {
-  font-family: sans-serif;
-  background: #111;
+  background-color: #121212;
   color: #eee;
+  font-family: sans-serif;
   text-align: center;
   padding: 2em;
 }
 
-audio {
+video {
   margin: 1em 0;
   width: 80%;
+  max-width: 720px;
+  border: 2px solid #444;
+  border-radius: 8px;
+}
+
+h3 {
+  margin-top: 1em;
+  font-size: 1.2em;
 }
