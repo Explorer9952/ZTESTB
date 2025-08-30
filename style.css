@@ -1,0 +1,12 @@
+body {
+  font-family: sans-serif;
+  background: #111;
+  color: #eee;
+  text-align: center;
+  padding: 2em;
+}
+
+audio {
+  margin: 1em 0;
+  width: 80%;
+}
