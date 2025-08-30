@@ -1,14 +1,456 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>M3U8 Video Player</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U Видеоплеер</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .upload-section, .player-section, .playlist-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .upload-area {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            background-color: #f0f8ff;
+            border-color: #2980b9;
+        }
+        
+        .upload-area p {
+            margin-top: 10px;
+            color: #7f8c8d;
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        .url-input {
+            display: flex;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        
+        .url-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .url-input button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .url-input button:hover {
+            background-color: #2980b9;
+        }
+        
+        video {
+            width: 100%;
+            border-radius: 8px;
+            background-color: #000;
+        }
+        
+        .playlist {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .playlist-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .playlist-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .playlist-item.active {
+            background-color: #e3f2fd;
+            font-weight: bold;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .controls button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .controls button:hover {
+            background-color: #2980b9;
+        }
+        
+        .controls button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fadbd8;
+            border-radius: 4px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .upload-section {
+                flex: 1 1 100%;
+            }
+            
+            .player-section {
+                flex: 2 1 600px;
+            }
+            
+            .playlist-section {
+                flex: 1 1 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>M3U8 Video Playerк</h1>
-  <div id="player-container"></div>
-  <script src="script.js"></script>
+    <header>
+        <h1>M3U Видеоплеер</h1>
+        <p>Загрузите M3U плейлист или укажите URL для воспроизведения видео</p>
+    </header>
+    
+    <div class="container">
+        <section class="upload-section">
+            <h2>Загрузка плейлиста</h2>
+            <div class="upload-area" id="dropArea">
+                <span>Перетащите M3U файл сюда или</span>
+                <label for="fileInput" style="color: #3498db; cursor: pointer;">выберите файл</label>
+                <input type="file" id="fileInput" accept=".m3u,.m3u8">
+                <p>Поддерживаются форматы M3U и M3U8</p>
+            </div>
+            
+            <div class="url-input">
+                <input type="text" id="urlInput" placeholder="Или введите URL M3U плейлиста">
+                <button id="loadUrlBtn">Загрузить</button>
+            </div>
+            
+            <div id="errorMessage" class="error hidden"></div>
+        </section>
+        
+        <section class="player-section">
+            <h2>Воспроизведение</h2>
+            <video id="videoPlayer" controls></video>
+            <div class="controls">
+                <button id="prevBtn" disabled>Предыдущее</button>
+                <button id="nextBtn" disabled>Следующее</button>
+            </div>
+        </section>
+        
+        <section class="playlist-section">
+            <h2>Плейлист</h2>
+            <div class="playlist" id="playlistContainer">
+                <p>Загрузите M3U плейлист, чтобы увидеть список видео</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы DOM
+            const fileInput = document.getElementById('fileInput');
+            const urlInput = document.getElementById('urlInput');
+            const loadUrlBtn = document.getElementById('loadUrlBtn');
+            const dropArea = document.getElementById('dropArea');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const playlistContainer = document.getElementById('playlistContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            let currentPlaylist = [];
+            let currentTrackIndex = -1;
+            
+            // Обработчики для drag and drop
+            dropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropArea.style.backgroundColor = '#ecf0f1';
+            });
+            
+            dropArea.addEventListener('dragleave', () => {
+                dropArea.style.backgroundColor = '';
+            });
+            
+            dropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropArea.style.backgroundColor = '';
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileUpload(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // Обработчик выбора файла
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleFileUpload(e.target.files[0]);
+                }
+            });
+            
+            // Обработчик загрузки по URL
+            loadUrlBtn.addEventListener('click', () => {
+                const url = urlInput.value.trim();
+                if (url) {
+                    loadPlaylistFromUrl(url);
+                } else {
+                    showError('Пожалуйста, введите URL M3U плейлиста');
+                }
+            });
+            
+            // Обработчики кнопок навигации
+            prevBtn.addEventListener('click', playPreviousTrack);
+            nextBtn.addEventListener('click', playNextTrack);
+            
+            // Функция загрузки плейлиста из файла
+            function handleFileUpload(file) {
+                if (!file.name.toLowerCase().endsWith('.m3u') && !file.name.toLowerCase().endsWith('.m3u8')) {
+                    showError('Пожалуйста, выберите файл в формате M3U или M3U8');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    parsePlaylist(e.target.result);
+                };
+                reader.onerror = () => {
+                    showError('Ошибка при чтении файла');
+                };
+                reader.readAsText(file);
+            }
+            
+            // Функция загрузки плейлиста по URL
+            function loadPlaylistFromUrl(url) {
+                hideError();
+                
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Ошибка HTTP: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(data => parsePlaylist(data))
+                    .catch(error => {
+                        showError(`Не удалось загрузить плейлист: ${error.message}`);
+                    });
+            }
+            
+            // Функция парсинга M3U плейлиста
+            function parsePlaylist(content) {
+                hideError();
+                
+                try {
+                    const lines = content.split('\n');
+                    const tracks = [];
+                    
+                    let track = {};
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        
+                        if (line.startsWith('#EXTINF:')) {
+                            // Извлекаем информацию о треке
+                            const durationMatch = line.match(/#EXTINF:(-?\d+)/);
+                            const titleMatch = line.match(/,(.*)$/);
+                            
+                            track = {
+                                duration: durationMatch ? parseInt(durationMatch[1]) : 0,
+                                title: titleMatch ? titleMatch[1].trim() : 'Без названия'
+                            };
+                        } else if (line && !line.startsWith('#') && !line.startsWith('http')) {
+                            // Это URL или путь к файлу (не комментарий и не пустая строка)
+                            track.url = line;
+                            tracks.push(track);
+                            track = {};
+                        } else if (line.startsWith('http')) {
+                            // Прямая ссылка без метаданных
+                            track = track || {};
+                            track.url = line;
+                            track.title = track.title || `Видео ${tracks.length + 1}`;
+                            tracks.push(track);
+                            track = {};
+                        }
+                    }
+                    
+                    if (tracks.length === 0) {
+                        showError('Не удалось найти видео в плейлисте');
+                        return;
+                    }
+                    
+                    currentPlaylist = tracks;
+                    renderPlaylist();
+                    playTrack(0);
+                } catch (error) {
+                    showError(`Ошибка при разборе плейлиста: ${error.message}`);
+                }
+            }
+            
+            // Функция отображения плейлиста
+            function renderPlaylist() {
+                playlistContainer.innerHTML = '';
+                
+                if (currentPlaylist.length === 0) {
+                    playlistContainer.innerHTML = '<p>Плейлист пуст</p>';
+                    return;
+                }
+                
+                currentPlaylist.forEach((track, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'playlist-item';
+                    if (index === currentTrackIndex) {
+                        item.classList.add('active');
+                    }
+                    
+                    item.textContent = track.title;
+                    item.addEventListener('click', () => playTrack(index));
+                    
+                    playlistContainer.appendChild(item);
+                });
+                
+                // Активируем кнопки навигации
+                prevBtn.disabled = currentPlaylist.length <= 1;
+                nextBtn.disabled = currentPlaylist.length <= 1;
+            }
+            
+            // Функция воспроизведения трека
+            function playTrack(index) {
+                if (index < 0 || index >= currentPlaylist.length) {
+                    return;
+                }
+                
+                const track = currentPlaylist[index];
+                currentTrackIndex = index;
+                
+                videoPlayer.src = track.url;
+                videoPlayer.load();
+                
+                // Обновляем выделение в плейлисте
+                const items = playlistContainer.querySelectorAll('.playlist-item');
+                items.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Функция воспроизведения следующего трека
+            function playNextTrack() {
+                if (currentPlaylist.length === 0) return;
+                
+                let nextIndex = currentTrackIndex + 1;
+                if (nextIndex >= currentPlaylist.length) {
+                    nextIndex = 0; // Зацикливание плейлиста
+                }
+                
+                playTrack(nextIndex);
+            }
+            
+            // Функция воспроизведения предыдущего трека
+            function playPreviousTrack() {
+                if (currentPlaylist.length === 0) return;
+                
+                let prevIndex = currentTrackIndex - 1;
+                if (prevIndex < 0) {
+                    prevIndex = currentPlaylist.length - 1; // Зацикливание плейлиста
+                }
+                
+                playTrack(prevIndex);
+            }
+            
+            // Функция показа ошибки
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('hidden');
+            }
+            
+            // Функция скрытия ошибки
+            function hideError() {
+                errorMessage.classList.add('hidden');
+            }
+            
+            // Автоматическое воспроизведение следующего видео при завершении текущего
+            videoPlayer.addEventListener('ended', playNextTrack);
+        });
+    </script>
 </body>
 </html>
